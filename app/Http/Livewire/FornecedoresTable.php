@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class FornecedoresTable extends Component
 {
     use WithPagination;
-    public $paginate = 2;
+    public $paginate = '';
     public $search = "";
     public $selectedClass = null;
     public $sections = null;
