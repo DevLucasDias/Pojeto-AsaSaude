@@ -14,10 +14,28 @@ use App\Http\Controllers\FornecedoresController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
-Route::get('/home', 'FornecedoresController@AddFornecedores');
+Route::middleware('auth')->group(function () {
+       
+
+        Route::post('/add-fornecedores', 'FornecedoresController@AddFornecedores')->name('addfornecedores');
+
+
+        Route::get('/home', 'ViewController@index')->name('home');
+        Route::get('/Produtos', 'ViewController@ShowProdutos')->name('produtos');
+        Route::get('/Fornecedores', 'ViewController@ShowFornecedores')->name('fornecedores');
+        
+        
+        Route::get('/formfornecedores', 'ViewController@showformfornecedores');
+        Route::get('/formprodutos', 'ViewController@showformprodutos');
+    });
+
+
+
+Route::get('/', 'LoginController@index')->name('index');
+Route::post('/login', 'LoginController@login')->name('login');
+
+
+
 

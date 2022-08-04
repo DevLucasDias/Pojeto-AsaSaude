@@ -6,14 +6,28 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
-     public function ShowFornecedores()
+     
+    public function Index()
     {
-        return view()
+        return view('show.home');
+    }
+
+    public function ShowFornecedores()
+    {
+        return view('show.fornecedores');
     }
 
     public function ShowProdutos()
     {
-        return view()
+        return view('show.produtos');
+    }
 
+    public function showformprodutos()
+    {
+        return view('forms/Insereprodutos');
+    }
+    public function showformfornecedores()
+    {
+        return view('forms/InsereFornecedores');
     }
 }
