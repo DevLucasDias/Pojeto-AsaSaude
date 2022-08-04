@@ -49,14 +49,14 @@
                         <td>{{ $data->endereco }}</td>
                         <td>
                             <button class="btn btn-danger btn-md"
-                                onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
+                                onclick="confirm('Tem Certeza que quer apagar este fornecedor?') || event.stopImmediatePropagation()"
                                 wire:click="deleteSingleRecord({{ $data->id }})"><i class="fa fa-trash"
                                     aria-hidden="true"></i></button>
-                            <button class="btn btn-danger btn-md"
+                            <button class="btn btn-primary btn-md"
                                     onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
                                     wire:click="deleteSingleRecord({{ $data->id }})"><i class="fa fa-trash"
                                         aria-hidden="true"></i></button>
-                             <button class="btn btn-danger btn-md"
+                             <button class="btn btn-success btn-md"
                                         onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
                                         wire:click="deleteSingleRecord({{ $data->id }})"><i class="fa fa-trash"
                                             aria-hidden="true"></i></button>
