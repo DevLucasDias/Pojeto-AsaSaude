@@ -25,7 +25,7 @@ class LoginController extends Controller
         
         if(auth()->attempt(array('cpf' => $dados['username'], 'password' => $dados['password'])))
         {
-            return redirect()->route('home');
+            return redirect()->route('fornecedores');
         }else{
           
             return redirect()->route('index')

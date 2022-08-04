@@ -36,22 +36,37 @@
                     <th scope="col">Name</th>
                     <th scope="col">CNPJ</th>
                     <th scope="col">Endereço</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($fornecedores as $data)
                     <tr>
-                        <td>{{ $data->id }}</td>
+                        <td><input type="checkbox" value="{{ $data->id }}" wire:model="checked"></td>
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->nome }}</td>
                         <td>{{ $data->CNPJ }}</td>
                         <td>{{ $data->endereco }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-md"
+                                onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
+                                wire:click="deleteSingleRecord({{ $data->id }})"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
+                            <button class="btn btn-danger btn-md"
+                                    onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
+                                    wire:click="deleteSingleRecord({{ $data->id }})"><i class="fa fa-trash"
+                                        aria-hidden="true"></i></button>
+                             <button class="btn btn-danger btn-md"
+                                        onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
+                                        wire:click="deleteSingleRecord({{ $data->id }})"><i class="fa fa-trash"
+                                            aria-hidden="true"></i></button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="">
-            <div>
+            <div  class="col-sm-6 offset-5" >
                 {{ $fornecedores->links() }}
             </div>
         </div>
