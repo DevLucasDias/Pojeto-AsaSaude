@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+
 @section('content')
 <body>
     <div class="container mx-auto">
@@ -8,6 +9,6 @@
 
 @endsection
 @section('scripts')
-<script>
-</script>
+
+
 @endsection

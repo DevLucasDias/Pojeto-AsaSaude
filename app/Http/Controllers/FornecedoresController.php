@@ -25,6 +25,8 @@ class FornecedoresController extends Controller
                     'estado' => $request->input('estado')
                 ]);
         }
+
+        return view("forms.InsereFornecedores");
     }
 
     public function EditFornecedores(Request $request)

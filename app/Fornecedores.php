@@ -14,4 +14,15 @@ class Fornecedores extends Model
     {
         $this->hasMany(Produtos::class);
     }
+    
+
+    public function scopeProcurar($query, $termo)
+    {
+       $termo =  "%$termo%";
+       $query->where(function($query) use ($termo){
+        $query->where('nome', 'like', $termo)
+        ->orWhere('CNPJ','like', $termo);
+       });
+        
+    }
 }
