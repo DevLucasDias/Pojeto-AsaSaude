@@ -20,15 +20,11 @@ Route::middleware('auth')->group(function () {
        
 
         Route::post('/add-fornecedores', 'FornecedoresController@AddFornecedores')->name('addfornecedores');
-
-
-        Route::get('/home', 'ViewController@index')->name('home');
-        Route::get('/Produtos', 'ViewController@ShowProdutos')->name('produtos');
+        Route::post('/edit-fornecedores', 'FornecedoresController@editFornecedores')->name('editFornecedores');
+        Route::post('/add-produtos', 'ProdutosController@AddProdutos')->name('addProdutos');
+        
         Route::get('/Fornecedores', 'ViewController@ShowFornecedores')->name('fornecedores');
-        
-        
-        Route::get('/formfornecedores', 'ViewController@showformfornecedores');
-        Route::get('/formprodutos', 'ViewController@showformprodutos');
+
     });
 
 

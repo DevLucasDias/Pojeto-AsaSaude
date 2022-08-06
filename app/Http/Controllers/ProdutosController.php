@@ -2,27 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Produtos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
-    public function AddFornecedores($request)
+    public function AddProdutos(Request $request)
     {
-        echo "fornecedores";
+        Produtos::create(
+            [
+                'nome_produto' => $request->input('nome_produto'),
+                'fornecedor_id' => $request->input('fornecedor_id')
+
+            ]
+        );
+
+        return redirect()->route('fornecedores');
     }
 
-    public function ShowFornecedores($request)
+    public function EditFornecedores(Request $request)
     {
-        echo "fornecedores";
-    }
+        $selection = Produtos::findOrFail($request->id);
+        $selection->update($request->all());
 
-    public function EditFornecedores($request)
-    {
-        echo "fornecedores";
-    }
-
-    public function RemoveFornecedores($request)
-    {
-        echo "fornecedores";
+        return redirect()->route('fornecedores');
     }
 }

@@ -10,10 +10,9 @@ class FornecedoresController extends Controller
 {
     public function AddFornecedores(Request $request)
     {
-        // dd($request);
         if (DB::table('fornecedores')->where('cnpj', $request->input('username'))->doesntExist()) {
 
-            $novoFornecedor = Fornecedores::create(
+        Fornecedores::create(
                 [
                     'nome' => $request->input('name'),
                     'CNPJ' => $request->input('cnpj'),
@@ -26,18 +25,16 @@ class FornecedoresController extends Controller
                 ]);
         }
 
-        return view("forms.InsereFornecedores");
+        return redirect()->route('fornecedores');
     }
 
     public function EditFornecedores(Request $request)
     {
-        echo "fornecedores";
-    }
+            $selection = Fornecedores::findOrFail($request->id);
+            $selection->update($request->all());
 
-    public function RemoveFornecedores(Request $request)
-    {
-        echo "fornecedores";
+        return redirect()->route('fornecedores');
+       
     }
-
 
 }

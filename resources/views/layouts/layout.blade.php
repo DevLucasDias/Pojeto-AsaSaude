@@ -10,9 +10,10 @@
     <link href="/css/all.css" rel="stylesheet">
     <link href="/css/solid.css" rel="stylesheet">
     <link href="/css/regular.css" rel="stylesheet">
-
+    <link href="/css/modificacoes.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <script src="/js/jquery.mask.min.js"></script>
     <script src="/js/jquery.min.js"></script>
 
@@ -23,7 +24,7 @@
     <div>
         <main class="py-4">
             @yield('content')
-            @yield('scripts')
+          
         </main>
     </div>
     <script src="/js/app.js"></script>
@@ -31,6 +32,7 @@
     <script src="/js/jquery.min.js"></script>
     @livewireScripts
 
+     @yield('scripts')     
 </body>
 
 </html>

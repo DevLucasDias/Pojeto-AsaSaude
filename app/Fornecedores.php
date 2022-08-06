@@ -12,7 +12,7 @@ class Fornecedores extends Model
 
     public function produtos()
     {
-        $this->hasMany(Produtos::class);
+        return  $this->hasMany(Produtos::class, 'fornecedor_id', 'id');
     }
     
 
