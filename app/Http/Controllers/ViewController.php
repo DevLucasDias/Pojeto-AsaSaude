@@ -12,17 +12,10 @@ class ViewController extends Controller
         return view('show.Fornecedores');
     }
 
-    public function ShowProdutos()
+    public function formAdicionaFornecedores()
     {
-        return view('show.Produtos');
+        return view('show.AdicionarFornecedores');
     }
 
-    public function showformprodutos()
-    {
-        return view('forms/Insereprodutos');
-    }
-    public function showformfornecedores()
-    {
-        return view('forms/InsereFornecedores');
-    }
+
 }

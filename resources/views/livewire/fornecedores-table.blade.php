@@ -22,8 +22,6 @@
                     <button class="btn btn-danger" type="button"
                         onclick="confirm('Tem certeza que deseja excluir esses fornecedores?') || event.stopImmediatePropagation"
                         wire:click="deletarFornecedores()"> <i class="fa fa-trash"></i>({{count($checked)}})</button>
-                    <button class="btn btn-primary btn-md" wire:click="selectAcao('', 'adicionar', '')"><i
-                            class="fa-solid fa-plus"></i></button>
                 </div>
                 @else
                 <div class="col-9">
@@ -33,6 +31,8 @@
 
                 <div class="col-1">
                     <select wire:model="paginate" class="custom-select" id="grid-state">
+                        <option>2</option>
+                        <option>5</option>
                         <option>10</option>
                         <option>20</option>
                         <option>30</option>
@@ -42,10 +42,7 @@
 
 
                 </div>
-                <div class="col-1">
-                    <button class="btn btn-primary btn-md" wire:click="selectAcao('', 'adicionar', '')"><i
-                            class="fa-solid fa-plus"></i></button>
-                </div>
+        
 
                 @endif
 
@@ -59,7 +56,13 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th cope="col">CNPJ</th>
+
+                        <th cope="col">Telefone</th>
+                        <th cope="col">Celular</th>
                         <th scope="col">Endereço</th>
+                        <th cope="col">N:</th>
+                        <th cope="col">Cidade</th>
+                        <th cope="col">UF</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -72,7 +75,12 @@
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->nome }}</td>
                         <td>{{ $data->CNPJ }}</td>
+                        <td>{{ $data->telefone }}</td>
+                        <td>{{ $data->celular }}</td>
                         <td>{{ $data->endereco }}</td>
+                        <td>{{ $data->numero }}</td>
+                        <td>{{ $data->cidade }}</td>
+                        <td>{{ $data->estado }}</td>
                         <td>
                             <button class="btn btn-danger btn-md"
                                 onclick="confirm('Tem Certeza que quer apagar este fornecedor?') || event.stopImmediatePropagation()"
@@ -110,51 +118,51 @@
                         <form action="/edit-fornecedores" method="post">
                             @csrf
                             <input type="text" name="id" value="{{$idFornecedor}}" >
-                            <div class="form-row">
+                            <div class="form-row" required>
                                 <div class="form-group col-md-12">
                                     <label for="name">Nome Completo:</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        value="{{$nomeFornecedor}}" >
+                                        value="{{$nomeFornecedor}}" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="cnpj">CNPJ:</label>
                                     <input type="text" class="form-control" id="cnpj" name="cnpj"
-                                        value="{{$CNPJFornecedor }}">
+                                        value="{{$CNPJFornecedor }}" required>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="telefone">Telefone:</label>
                                     <input type="text" class="form-control" id="telefone" name="telefone"
-                                        value="{{$telefoneFornecedor }}">
+                                        value="{{$telefoneFornecedor }}" >
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="celular">Celular::</label>
                                     <input type="text" class="form-control" id="celular" name="celular"
-                                        value="{{$celularFornecedor }}">
+                                        value="{{$celularFornecedor }}" >
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-7">
                                     <label for="endereco">Endereço:</label>
                                     <input type="text" class="form-control" id="endereco" name="endereco"
-                                        value="{{$enderecoFornecedor }}">
+                                        value="{{$enderecoFornecedor }}" required>
                                 </div>
                                 <div class="form-group col-md-1">
                                     <label for="numero">N:</label>
                                     <input type="text" class="form-control" id="numero" name="numero"
-                                        value="{{ $numeroFornecedor }}">
+                                        value="{{ $numeroFornecedor }}" required>
                                 </div>
 
                                 <div class="form-group col-md-3">
                                     <label for="cidade">Cidade:</label>
                                     <input type="text" class="form-control" id="cidade" name="cidade"
-                                        value="{{$cidadeFornecedor }}">
+                                        value="{{$cidadeFornecedor }}" required>
                                 </div>
                                 <div class="form-group col-md-1">
                                     <label for="estado">UF:</label>
                                     <input type="text" class="form-control" id="estado" name="estado"
-                                        value="{{$estadoFornecedor }}">
+                                        value="{{$estadoFornecedor }}" required>
                                 </div>
                             </div>
                             <div class="form-check">
@@ -206,7 +214,7 @@
                                             </div>
                                            
                                         </div>
-                                        <button  type="submit" class="btn btn-primary">Salvar</button>
+                                        <button  type="submit" class="btn btn-primary">Inserir Produto </button>
                                     </form>
                                 </div>
 
@@ -246,64 +254,7 @@
 
         </div>
 
-        <div class="modal fade" id="modalAdd" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1>Adicionar Fornecedor</h1>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/add-fornecedores" method="post">
-                            @csrf
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="nomeFornecedor">Nome Completo:</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="cnpj">CNPJ:</label>
-                                    <input  type="text" class="form-control" id="cnpj" name="cnpj" required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="telefone">Telefone:</label>
-                                    <input  type="text" class="form-control" id="telefone" name="telefone">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="celular">Celular::</label>
-                                    <input  type="text" class="form-control" id="celular" name="celular">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-7">
-                                    <label for="endereco">Endereço:</label>
-                                    <input type="text" class="form-control" id="endereco" name="endereco" required>
-                                </div>
-                                <div class="form-group col-md-1">
-                                    <label for="numero">N:</label>
-                                    <input type="text" class="form-control" id="numero" name="numero" required>
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    <label for="cidade">Cidade:</label>
-                                    <input  type="text" class="form-control" id="cidade" name="cidade" required>
-                                </div>
-                                <div class="form-group col-md-1">
-                                    <label for="estado">UF:</label>
-                                    <input  type="text" class="form-control" id="estado" name="estado" required>
-                                </div>
-                            </div>
-                            <div class="form-check">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+      
 
 
     </div>

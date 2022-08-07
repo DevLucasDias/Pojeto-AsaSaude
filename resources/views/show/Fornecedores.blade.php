@@ -3,16 +3,13 @@
 @section('content')
 
 <body>
-   <div class="container mx-auto">
+   <div class="container mx-auto" >
       <h1 class="text-3xl text-center my-10">Fornecedores</h1>
    </div>
    <livewire:fornecedores-table>
       @endsection
       @section('scripts')
       <script>
-type = "text/javascript" > $("#cnpj").mask("00.000.000/0000-00");
-type = "text/javascript" > $("#telefone").mask("(00) 0000-0000");
-type = "text/javascript" > $("#celular").mask("(00) 00000-0000");
 
  window.addEventListener('openModalEdit', event => {
     $('#modalEdit').modal('show');
@@ -30,9 +27,6 @@ type = "text/javascript" > $("#celular").mask("(00) 00000-0000");
     $('#modalView').modal('hide');
  })
 
- window.addEventListener('openModalAdd', event => {
-    $('#modalAdd').modal('show');
- })
  window.addEventListener('recarregaPagina', event => {
    document.location.reload(true);
  })

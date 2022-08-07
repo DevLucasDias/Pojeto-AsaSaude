@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/add-produtos', 'ProdutosController@AddProdutos')->name('addProdutos');
         
         Route::get('/Fornecedores', 'ViewController@ShowFornecedores')->name('fornecedores');
+        Route::get('/Adicionar-Fornecedores', 'ViewController@formAdicionaFornecedores')->name('addfornecedores');
+
 
     });
 
