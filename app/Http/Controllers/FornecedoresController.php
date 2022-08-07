@@ -10,7 +10,17 @@ class FornecedoresController extends Controller
 {
     public function AddFornecedores(Request $request)
     {
-        if (DB::table('fornecedores')->where('cnpj', $request->input('username'))->doesntExist()) {
+        $dados = $request;
+        $this->validate( $dados,[
+            'name' => 'required',
+            'cnpj' => 'required',
+            'endereco' => 'required',
+            'numero' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required'
+            ]);
+
+        if (DB::table('fornecedores')->where('CNPJ', $request->input('cnpj'))->doesntExist()) {
 
         Fornecedores::create(
                 [
@@ -25,7 +35,7 @@ class FornecedoresController extends Controller
                 ]);
         }
 
-        return redirect()->route('fornecedores');
+        return redirect()->route('addfornecedores');
     }
 
     public function EditFornecedores(Request $request)

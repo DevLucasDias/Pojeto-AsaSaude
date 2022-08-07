@@ -7,7 +7,6 @@ use Livewire\WithPagination;
 
 use App\Fornecedores;
 use App\Produtos;
-use App\User;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\This;
 
@@ -17,12 +16,12 @@ class FornecedoresTable extends Component
     public $paginate = '10';
     public $paginateProdutos = '10';
     public $search = "";
-    public $idFornecedor;
+    public $idFornecedor = "";
     public $checked = [];
     public $selectPage = false;
     public $dadosFornecedor = [];
 
-    public $fornecedorId = "";
+    public $fornecedorId;
     public $action;
 
     public $nomeFornecedor;
@@ -72,9 +71,7 @@ class FornecedoresTable extends Component
         if ($action == 'view') {
             $this->dispatchBrowserEvent('openModalView');
         }
-        if ($action == 'adicionar') {
-            $this->dispatchBrowserEvent('openModalAdd');
-        }
+    
     }
 
     public function editFornecedor($action,  $idFornecedor, $nomeFornecedor, $CNPJFornecedor, $celularFornecedor, $telefoneFornecedor, $enderecoFornecedor, $numeroFornecedor, $cidadeFornecedor, $estadoFornecedor)
@@ -101,7 +98,6 @@ class FornecedoresTable extends Component
         return view('livewire.fornecedores-table', [
             'fornecedores' => Fornecedores::procurar(trim($this->search))->simplePaginate($this->paginate),
             'produtos' => Produtos::produtosDeFornecedor(trim($this->fornecedorId))->simplePaginate($this->paginateProdutos),
-
         ]);
     }
 }

@@ -1,6 +1,7 @@
 <div>
-    <div class="container ">
-        <div class="justify-content-center">
+    <div>
+        <div>
+
             <div class="form-row">
 
                 @if ($checked)
@@ -10,7 +11,7 @@
                 </div>
 
                 <div class="col-1">
-                    <select wire:model="paginate" class="custom-select" id="grid-state">
+                    <select wire:model="paginate" class="custom-select" id="grid-state" >
                         <option>5</option>
                         <option>10</option>
                         <option>20</option>
@@ -18,10 +19,11 @@
                         <option>100</option>
                     </select>
                 </div>
+
                 <div class="col-2">
                     <button class="btn btn-danger" type="button"
                         onclick="confirm('Tem certeza que deseja excluir esses fornecedores?') || event.stopImmediatePropagation"
-                        wire:click="deletarFornecedores()"> <i class="fa fa-trash"></i>({{count($checked)}})</button>
+                        wire:click="deletarFornecedores()" title="Excluir em massa"> <i class="fa fa-trash"></i>({{count($checked)}})</button>
                 </div>
                 @else
                 <div class="col-9">
@@ -39,16 +41,9 @@
                         <option>50</option>
                         <option>100</option>
                     </select>
-
-
                 </div>
-        
-
                 @endif
-
             </div>
-
-
             <table id="tableFornecedores" name="tableFornecedores" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -71,7 +66,7 @@
                     @foreach ($fornecedores as $data)
                     <tr>
 
-                        <td><input type="checkbox" value="{{ $data->id }}" wire:model="checked" ></td>
+                        <td><input type="checkbox" value="{{ $data->id }}" wire:model="checked"></td>
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->nome }}</td>
                         <td>{{ $data->CNPJ }}</td>
@@ -84,15 +79,15 @@
                         <td>
                             <button class="btn btn-danger btn-md"
                                 onclick="confirm('Tem Certeza que quer apagar este fornecedor?') || event.stopImmediatePropagation()"
-                                wire:click="deleteUnicoFornecedorSelecionado({{ $data->id }})"><i class="fa fa-trash"
+                                wire:click="deleteUnicoFornecedorSelecionado({{ $data->id }})" title="Excluir"><i class="fa fa-trash"
                                     aria-hidden="true"></i></button>
                             <button class="btn btn-primary btn-md"
-                                wire:click="editFornecedor('edit', '{{ $data->id }}',  '{{ $data->nome }}' , '{{ $data->CNPJ }}' , '{{ $data->celular }}' , '{{ $data->telefone }}' , '{{ $data->endereco }}' ,' {{ $data->numero }}' , '{{ $data->cidade }}' , '{{ $data->estado }}')"><i
-                                    class="fa fa-solid fa-file-pen" aria-hidden="true"></i></button>
+                                wire:click="editFornecedor('edit', '{{ $data->id }}' ,  '{{ $data->nome }}' , '{{ $data->CNPJ }}' , '{{ $data->celular }}' , '{{ $data->telefone }}' , '{{ $data->endereco }}' ,' {{ $data->numero }}' , '{{ $data->cidade }}' , '{{ $data->estado }}')"><i
+                                    class="fa fa-solid fa-file-pen" aria-hidden="true" title="Editar"></i></button>
 
                             <button class="btn btn-success btn-md"
-                                wire:click="selectAcao({{ $data->id }},  'view', {{$data}})"><i class="fa fa-eye"
-                                    aria-hidden="true"></i></button>
+                                wire:click="selectAcao({{ $data->id }},  'view', {{ $data }})"><i class="fa fa-eye"
+                                    aria-hidden="true" title="Produtos"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -117,29 +112,33 @@
                     <div class="modal-body">
                         <form action="/edit-fornecedores" method="post">
                             @csrf
-                            <input type="text" name="id" value="{{$idFornecedor}}" >
-                            <div class="form-row" required>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Identificação do Fornecedor:</label><input type="text" class="form-control col-sm-1" name="id" value="{{$idFornecedor}}">
+                                </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="name">Nome Completo:</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        value="{{$nomeFornecedor}}" required>
+                                        value="{{$nomeFornecedor}}">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="cnpj">CNPJ:</label>
                                     <input type="text" class="form-control" id="cnpj" name="cnpj"
-                                        value="{{$CNPJFornecedor }}" required>
+                                        value="{{$CNPJFornecedor }}">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="telefone">Telefone:</label>
                                     <input type="text" class="form-control" id="telefone" name="telefone"
-                                        value="{{$telefoneFornecedor }}" >
+                                        value="{{$telefoneFornecedor }}">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="celular">Celular::</label>
                                     <input type="text" class="form-control" id="celular" name="celular"
-                                        value="{{$celularFornecedor }}" >
+                                        value="{{$celularFornecedor }}">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -180,7 +179,6 @@
             </div>
         </div>
 
-        <!-- Produtos do Fornecedor -->
 
         <div class="modal fade" id="modalView" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
@@ -194,27 +192,29 @@
                                 data-toggle="collapse" data-target="#inserirProdutos" aria-expanded="false"
                                 aria-controls="collapseExample">
                                 Inserir Produtos
+
                             </button>
                             <div class="collapse" id="inserirProdutos">
                                 <div class="card card-body">
                                     <form action="/add-produtos" method="post">
                                         @csrf
-                                       
+
                                         <div class="form-row">
                                             <div class="form-group col-md-9">
-                                                <input type="text" class="form-control" id="nome_produto" name="nome_produto" required>
+                                                <input type="text" class="form-control" id="nome_produto"
+                                                    name="nome_produto" required>
                                                 <label for="name">Nome do Produto</label>
 
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <input type="text" class="form-control" id="fornecedor_id"
-                                                    name="fornecedor_id" value="{{$fornecedorId}}" required>
+                                                    name="fornecedor_id" value=" {{$fornecedorId}}">
                                                 <label for="name">Codigo do Fornecedor</label>
 
                                             </div>
-                                           
+
                                         </div>
-                                        <button  type="submit" class="btn btn-primary">Inserir Produto </button>
+                                        <button type="submit" class="btn btn-primary">Inserir Produto </button>
                                     </form>
                                 </div>
 
@@ -229,16 +229,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{$produtos}}
+
 
                                     @foreach ($produtos as $dataProdutos)
                                     <tr>
                                         <td>{{ $dataProdutos->id }}</td>
                                         <td>{{ $dataProdutos->nome_produto }}</td>
                                         <td> <button class="btn btn-danger btn-md"
-                                            onclick="confirm('Tem Certeza que quer apagar este Produto?') || event.stopImmediatePropagation()"
-                                            wire:click="deleteUnicoProdutoSelecionado('{{ $dataProdutos->id }}')"><i class="fa fa-trash"
-                                                aria-hidden="true"></i></button>
+                                                onclick="confirm('Tem Certeza que quer apagar este Produto?') || event.stopImmediatePropagation()"
+                                                wire:click="deleteUnicoProdutoSelecionado('{{ $dataProdutos->id }}')"><i
+                                                    class="fa fa-trash" aria-hidden="true"></i></button>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -251,11 +251,7 @@
                 </div>
             </div>
 
-
         </div>
-
-      
-
-
     </div>
+</div>
 </div>
