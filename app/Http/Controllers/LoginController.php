@@ -19,8 +19,8 @@ class LoginController extends Controller
     {
         $dados = $request->all();
         $this->validate($request,[
-        'username' => 'required',
-        'password' => 'required',
+        'username' => 'required|exists:users,cpf',
+        'password' => 'required|exists:users,password',
         ]);
         
         if(auth()->attempt(array('cpf' => $dados['username'], 'password' => $dados['password'])))

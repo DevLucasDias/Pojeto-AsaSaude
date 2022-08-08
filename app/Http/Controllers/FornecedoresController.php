@@ -13,7 +13,7 @@ class FornecedoresController extends Controller
         $dados = $request;
         $this->validate( $dados,[
             'name' => 'required',
-            'cnpj' => 'required',
+            'cnpj' => 'required|unique:fornecedores',
             'endereco' => 'required',
             'numero' => 'required',
             'cidade' => 'required',
